@@ -1,1 +1,24 @@
 Hello World!
+
+## Firecrawl integration
+
+This repo wires a minimal, real [Firecrawl](https://www.firecrawl.dev) scrape:
+`main.py` scrapes a single page and prints its Markdown.
+
+### Setup
+
+1. Install dependencies:
+
+       pip install -r requirements.txt
+
+2. Provide your API key — copy `.env.example` to `.env` and set it, or export it:
+
+       export FIRECRAWL_API_KEY=fc-your-api-key-here
+
+### Run
+
+    python main.py                  # scrapes https://example.com
+    python main.py https://news.ycombinator.com
+
+The wired call is `firecrawl.scrape(url, formats=["markdown"])` (see `main.py`),
+returning a document whose `.markdown` field is printed to stdout.
