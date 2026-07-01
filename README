@@ -1,1 +1,33 @@
 Hello World!
+
+This repo doubles as a tiny "Hello World" for Firecrawl (https://firecrawl.dev)
+— turning any web page into clean, LLM-ready Markdown with a couple of lines of
+Python.
+
+Quickstart
+----------
+
+  1. Install the dependency:
+
+       pip install -r requirements.txt
+
+  2. Set your API key (get one at https://firecrawl.dev):
+
+       cp .env.example .env        # then edit, or just:
+       export FIRECRAWL_API_KEY=fc-...
+
+  3. Run the example:
+
+       python hello_firecrawl.py                       # scrape this repo's page
+       python hello_firecrawl.py scrape https://example.com
+       python hello_firecrawl.py search "Hello World site:github.com"
+
+What it does
+------------
+
+hello_firecrawl.py wraps two Firecrawl endpoints:
+
+  * scrape  — fetch a single URL and return its Markdown (firecrawl.scrape)
+  * search  — search the web and list the top results (firecrawl.search)
+
+Learn more in the Firecrawl docs: https://docs.firecrawl.dev
