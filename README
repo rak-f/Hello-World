@@ -1,1 +1,25 @@
 Hello World!
+
+---
+
+Firecrawl example
+-----------------
+
+hello_firecrawl.py is a tiny, self-contained example that creates a Firecrawl
+monitor -- a scheduled, recurring check that watches a URL for changes --
+prints it, then cleans it up. A "Hello World" for web monitoring.
+
+Setup:
+
+    pip install -r requirements.txt
+    cp .env.example .env        # then add your FIRECRAWL_API_KEY
+
+Run:
+
+    export FIRECRAWL_API_KEY="fc-..."
+    python hello_firecrawl.py [URL] [--keep]   # defaults to https://example.com
+
+A monitor is a persistent resource on your account, so the example deletes the
+one it creates. Pass --keep to leave it running.
+
+Get a free API key and read the docs at https://docs.firecrawl.dev
