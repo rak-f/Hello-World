@@ -1,1 +1,20 @@
 Hello World!
+
+Firecrawl example
+-----------------
+
+A tiny "Hello World" for Firecrawl (https://docs.firecrawl.dev): scrape a web
+page and print it as clean Markdown, using the official Firecrawl Python SDK.
+
+Setup:
+
+    pip install -r requirements.txt
+    cp .env.example .env    # add your FIRECRAWL_API_KEY, or export it directly
+
+Run (defaults to https://example.com; pass any URL as an argument):
+
+    python hello_firecrawl.py
+    python hello_firecrawl.py https://firecrawl.dev
+
+Get an API key at https://www.firecrawl.dev and read the docs at
+https://docs.firecrawl.dev
