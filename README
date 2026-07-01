@@ -1,1 +1,21 @@
 Hello World!
+
+## Hello, Firecrawl
+
+A tiny "Hello World" example that runs one live web search through
+[Firecrawl](https://firecrawl.dev) and prints the top results.
+
+### Setup
+
+    pip install -r requirements.txt
+    cp .env.example .env        # then add your key from https://firecrawl.dev
+    export FIRECRAWL_API_KEY=fc-...
+
+### Run
+
+    python3 hello_firecrawl.py                 # searches for "Hello World"
+    python3 hello_firecrawl.py "your query"    # or your own query
+
+The script uses the official `firecrawl-py` SDK and the `search` endpoint.
+See the Firecrawl docs at https://docs.firecrawl.dev for other operations
+(scrape, crawl, map, extract).
