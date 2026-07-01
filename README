@@ -1,1 +1,23 @@
 Hello World!
+
+Firecrawl example
+-----------------
+
+A tiny "Hello World" for Firecrawl (https://docs.firecrawl.dev): run a small
+crawl (capped at 5 pages by default) and print the title and URL of each page
+found, using the official Firecrawl Python SDK. Override the page cap with the
+CRAWL_LIMIT environment variable (e.g. CRAWL_LIMIT=3).
+
+Setup:
+
+    pip install -r requirements.txt
+    cp .env.example .env    # add your FIRECRAWL_API_KEY, or export it directly
+
+Run (defaults to https://example.com; pass any URL as an argument):
+
+    python hello_firecrawl.py
+    python hello_firecrawl.py https://firecrawl.dev
+    CRAWL_LIMIT=3 python hello_firecrawl.py    # crawl at most 3 pages
+
+Get an API key at https://www.firecrawl.dev and read the docs at
+https://docs.firecrawl.dev
