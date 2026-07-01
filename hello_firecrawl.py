@@ -13,6 +13,9 @@ Setup:
 Run:
     python hello_firecrawl.py [URL]
 
+The page cap defaults to 5 but can be overridden with the CRAWL_LIMIT
+environment variable, e.g. CRAWL_LIMIT=3 python hello_firecrawl.py
+
 Get a key and read the docs at https://docs.firecrawl.dev
 """
 
@@ -22,8 +25,33 @@ import sys
 from firecrawl import Firecrawl
 
 DEFAULT_URL = "https://example.com"
-# Keep the demo cheap and fast: crawl at most a few pages.
-PAGE_LIMIT = 5
+# Keep the demo cheap and fast: crawl at most a few pages. Overridable via
+# the CRAWL_LIMIT env var.
+DEFAULT_PAGE_LIMIT = 5
+
+
+def resolve_page_limit() -> int:
+    """Read the crawl page cap from CRAWL_LIMIT, falling back to the default."""
+    raw = os.environ.get("CRAWL_LIMIT")
+    if not raw:
+        return DEFAULT_PAGE_LIMIT
+    try:
+        limit = int(raw)
+    except ValueError:
+        print(
+            f"CRAWL_LIMIT={raw!r} is not an integer; using default "
+            f"{DEFAULT_PAGE_LIMIT}.",
+            file=sys.stderr,
+        )
+        return DEFAULT_PAGE_LIMIT
+    if limit < 1:
+        print(
+            f"CRAWL_LIMIT={limit} must be >= 1; using default "
+            f"{DEFAULT_PAGE_LIMIT}.",
+            file=sys.stderr,
+        )
+        return DEFAULT_PAGE_LIMIT
+    return limit
 
 
 def main() -> int:
@@ -37,9 +65,10 @@ def main() -> int:
         return 1
 
     url = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_URL
+    page_limit = resolve_page_limit()
 
     firecrawl = Firecrawl(api_key=api_key)
-    job = firecrawl.crawl(url, limit=PAGE_LIMIT, formats=["markdown"])
+    job = firecrawl.crawl(url, limit=page_limit, formats=["markdown"])
 
     pages = job.data or []
     print(f"# Crawled {url} — {len(pages)} page(s) [status: {job.status}]\n")
