@@ -1,1 +1,17 @@
 Hello World!
+
+## Firecrawl crawl example
+
+A tiny "hello world" for [Firecrawl](https://docs.firecrawl.dev): crawl a site
+and print the pages it discovers as clean markdown.
+
+```sh
+pip install -r requirements.txt
+cp .env.example .env          # then add your FIRECRAWL_API_KEY
+export FIRECRAWL_API_KEY=fc-...
+
+python crawl_example.py                          # crawls https://docs.firecrawl.dev
+python crawl_example.py https://example.com 10   # custom start URL and page limit
+```
+
+Get an API key and read more at https://docs.firecrawl.dev.
