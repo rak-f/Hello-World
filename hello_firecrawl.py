@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Hello World, via Firecrawl.
 
-A tiny, self-contained example that scrapes a web page with Firecrawl and
-prints its content as Markdown -- the "Hello World" of web data extraction.
+A tiny, self-contained example that runs a web search with Firecrawl and prints
+the top results -- the "Hello World" of web search.
 
 Usage:
     export FIRECRAWL_API_KEY="fc-..."   # see .env.example
-    python hello_firecrawl.py [URL]
+    python hello_firecrawl.py [QUERY...]
 
 Get a free API key and read the docs at https://docs.firecrawl.dev
 """
@@ -16,7 +16,8 @@ import sys
 
 from firecrawl import Firecrawl
 
-DEFAULT_URL = "https://example.com"
+DEFAULT_QUERY = "what is Firecrawl"
+LIMIT = 5
 
 
 def main() -> int:
@@ -29,15 +30,24 @@ def main() -> int:
         )
         return 1
 
-    url = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_URL
+    query = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else DEFAULT_QUERY
     firecrawl = Firecrawl(api_key=api_key)
 
-    print(f"Scraping {url} ...")
-    doc = firecrawl.scrape(url, formats=["markdown"])
+    print(f"Searching for {query!r} ...\n")
+    results = firecrawl.search(query, limit=LIMIT)
 
-    title = getattr(doc.metadata, "title", None) if doc.metadata else None
-    print(f"Hello from {title or url}!\n")
-    print(doc.markdown or "(no markdown content returned)")
+    web = results.web or []
+    if not web:
+        print("(no web results returned)")
+        return 0
+
+    print(f"Hello from Firecrawl! Top {len(web)} results:\n")
+    for i, result in enumerate(web, start=1):
+        print(f"{i}. {result.title or '(untitled)'}")
+        print(f"   {result.url}")
+        if result.description:
+            print(f"   {result.description}")
+        print()
     return 0
 
 

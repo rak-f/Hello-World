@@ -5,9 +5,8 @@ Hello World!
 Firecrawl example
 -----------------
 
-hello_firecrawl.py is a tiny, self-contained example that scrapes a web page
-with Firecrawl and prints its content as Markdown -- a "Hello World" for web
-data extraction.
+hello_firecrawl.py is a tiny, self-contained example that runs a web search
+with Firecrawl and prints the top results -- a "Hello World" for web search.
 
 Setup:
 
@@ -17,6 +16,6 @@ Setup:
 Run:
 
     export FIRECRAWL_API_KEY="fc-..."
-    python hello_firecrawl.py [URL]   # defaults to https://example.com
+    python hello_firecrawl.py [QUERY...]   # defaults to "what is Firecrawl"
 
 Get a free API key and read the docs at https://docs.firecrawl.dev
