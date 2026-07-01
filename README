@@ -1,1 +1,20 @@
 Hello World!
+
+## Firecrawl example
+
+A minimal example of using [Firecrawl](https://docs.firecrawl.dev) to scrape a
+web page into clean, LLM-ready Markdown lives in
+[`examples/firecrawl_scrape.py`](examples/firecrawl_scrape.py).
+
+### Run it
+
+    pip install -r requirements.txt
+    cp .env.example .env        # then add your FIRECRAWL_API_KEY
+    export FIRECRAWL_API_KEY="fc-..."   # get a key at https://firecrawl.dev
+
+    python examples/firecrawl_scrape.py https://example.com
+
+The script fetches the given URL (default: https://example.com) with Firecrawl's
+`scrape` endpoint and prints the resulting Markdown. See the
+[Firecrawl docs](https://docs.firecrawl.dev) for other endpoints (crawl, map,
+search, extract).
