@@ -3,8 +3,9 @@ Hello World!
 Firecrawl example
 -----------------
 
-A tiny "Hello World" for Firecrawl (https://docs.firecrawl.dev): scrape a web
-page and print it as clean Markdown, using the official Firecrawl Python SDK.
+A tiny "Hello World" for Firecrawl (https://docs.firecrawl.dev): run a small
+crawl (capped at 5 pages) and print the title and URL of each page found,
+using the official Firecrawl Python SDK.
 
 Setup:
 

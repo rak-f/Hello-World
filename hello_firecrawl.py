@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Hello World for Firecrawl.
 
-Scrapes a web page and prints it as clean Markdown — the web-scraping
+Runs a small crawl (capped at a handful of pages, each fetched as clean
+Markdown) and prints the title and URL of every page found — the web-crawling
 equivalent of "Hello World!". Uses the official Firecrawl Python SDK.
 
 Setup:
@@ -21,6 +22,8 @@ import sys
 from firecrawl import Firecrawl
 
 DEFAULT_URL = "https://example.com"
+# Keep the demo cheap and fast: crawl at most a few pages.
+PAGE_LIMIT = 5
 
 
 def main() -> int:
@@ -36,10 +39,15 @@ def main() -> int:
     url = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_URL
 
     firecrawl = Firecrawl(api_key=api_key)
-    doc = firecrawl.scrape(url, formats=["markdown"])
+    job = firecrawl.crawl(url, limit=PAGE_LIMIT, formats=["markdown"])
 
-    print(f"# Scraped {url}\n")
-    print(doc.markdown or "(no markdown returned)")
+    pages = job.data or []
+    print(f"# Crawled {url} — {len(pages)} page(s) [status: {job.status}]\n")
+    for i, doc in enumerate(pages, start=1):
+        meta = doc.metadata
+        source = (meta and meta.source_url) or url
+        title = (meta and meta.title) or "(untitled)"
+        print(f"{i}. {title} — {source}")
     return 0
 
 
