@@ -1,1 +1,13 @@
 Hello World!
+
+Firecrawl example
+-----------------
+
+examples/search_and_scrape.py runs a Firecrawl web search and scrapes the top
+result as markdown.
+
+    pip install -r examples/requirements.txt
+    export FIRECRAWL_API_KEY=fc-...
+    python examples/search_and_scrape.py "hello world program"
+
+Get an API key and read the docs at https://docs.firecrawl.dev
