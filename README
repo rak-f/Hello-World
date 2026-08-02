@@ -1,1 +1,13 @@
 Hello World!
+
+Examples
+--------
+
+examples/crawl_site.py crawls a small site with the Firecrawl API and saves each
+page's markdown to a file.
+
+    export FIRECRAWL_API_KEY="fc-..."
+    pip install -r examples/requirements.txt
+    python examples/crawl_site.py https://example.com --limit 5 --out pages
+
+Get an API key and read the docs at https://docs.firecrawl.dev
