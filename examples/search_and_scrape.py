@@ -15,6 +15,16 @@ from firecrawl import Firecrawl
 DEFAULT_QUERY = "hello world program"
 PREVIEW_CHARS = 500
 
+# Bounds how long a single HTTP request may block locally. Without it the SDK
+# passes timeout=None to requests, so a server that accepts the connection and
+# then never responds blocks indefinitely.
+# The SDK already retries failed requests 3x with exponential backoff.
+HTTP_TIMEOUT_SECONDS = 60
+
+# Server-side render budget, in MILLISECONDS (min 1000). Note the SDK docstring
+# claims seconds; the API rejects values below 1000, so milliseconds it is.
+SCRAPE_TIMEOUT_MS = 30_000
+
 
 def main() -> int:
     api_key = os.environ.get("FIRECRAWL_API_KEY")
@@ -23,7 +33,7 @@ def main() -> int:
         return 1
 
     query = " ".join(sys.argv[1:]) or DEFAULT_QUERY
-    firecrawl = Firecrawl(api_key=api_key)
+    firecrawl = Firecrawl(api_key=api_key, timeout=HTTP_TIMEOUT_SECONDS)
 
     results = firecrawl.search(query, limit=3)
     if not results.web:
@@ -33,7 +43,9 @@ def main() -> int:
     top = results.web[0]
     print(f"Top result: {top.title}\n{top.url}\n")
 
-    document = firecrawl.scrape(top.url, formats=["markdown"])
+    document = firecrawl.scrape(
+        top.url, formats=["markdown"], timeout=SCRAPE_TIMEOUT_MS
+    )
     markdown = document.markdown or ""
     print(markdown[:PREVIEW_CHARS])
     if len(markdown) > PREVIEW_CHARS:

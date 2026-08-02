@@ -10,4 +10,7 @@ result as markdown.
     export FIRECRAWL_API_KEY=fc-...
     python examples/search_and_scrape.py "hello world program"
 
+One run costs about 3 Firecrawl credits (2 for the search, 1 for the scrape),
+measured against the current API. See https://firecrawl.dev/pricing
+
 Get an API key and read the docs at https://docs.firecrawl.dev
