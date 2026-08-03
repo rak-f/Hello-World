@@ -1,1 +1,13 @@
 Hello World!
+
+Firecrawl example
+-----------------
+
+examples/extract_links.py lists the URLs of a site using Firecrawl's map
+endpoint (https://docs.firecrawl.dev/api-reference/endpoint/map):
+
+    pip install -r examples/requirements.txt
+    export FIRECRAWL_API_KEY=fc-...      # get a key at https://firecrawl.dev
+    python examples/extract_links.py https://example.com --limit 20
+
+Firecrawl docs: https://docs.firecrawl.dev
