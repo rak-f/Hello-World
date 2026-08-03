@@ -1,1 +1,14 @@
 Hello World!
+
+Examples
+--------
+
+examples/scrape_to_json.py scrapes a page with Firecrawl and prints structured
+JSON, using the scrape endpoint's `json` extraction format.
+
+    pip install -r examples/requirements.txt
+    export FIRECRAWL_API_KEY=fc-...
+    python examples/scrape_to_json.py https://example.com
+
+Get an API key at https://firecrawl.dev; the API is documented at
+https://docs.firecrawl.dev.
