@@ -1,1 +1,15 @@
 Hello World!
+
+Firecrawl example
+-----------------
+
+examples/firecrawl_scrape.py scrapes a single URL with Firecrawl and prints the
+page as markdown.
+
+    pip install 'firecrawl-py>=4.43.0'
+    export FIRECRAWL_API_KEY=fc-...          # get a key at https://firecrawl.dev
+    python examples/firecrawl_scrape.py https://example.com
+
+The URL argument is optional and defaults to https://example.com.
+
+Firecrawl docs: https://docs.firecrawl.dev
